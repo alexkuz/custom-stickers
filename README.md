@@ -1,0 +1,2 @@
+custom-stickers
+===============
