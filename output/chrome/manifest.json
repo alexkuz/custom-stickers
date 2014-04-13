@@ -23,6 +23,7 @@
     }, 
     "permissions": [
         "tabs", 
+        "notifications", 
         "webRequest", 
         "webRequestBlocking", 
         "*://*.vk.com/*", 

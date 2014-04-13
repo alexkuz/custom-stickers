@@ -55,7 +55,7 @@
   Emoji.getTabsCode = inject(Emoji.getTabsCode, function(args, func) {
     var extra = [];
     for (var i = 0; i < customStickers.albums.length; i++) {
-      if (customStickers.opts['album' + customStickers.albums[i][0]]) {
+      if (customStickers.opts.albums.indexOf(customStickers.albums[i][0]) !== -1) {
         extra.push(customStickers.albums[i]);
       }
     }

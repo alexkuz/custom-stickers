@@ -1,10 +1,10 @@
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-  if (request.method == 'updateOptions') {
-    saveOptions(request.update, true);
-  } else
-  if (request.method == 'getOptions') {
-    sendResponse(opts);
-  }
+kango.addMessageListener('updateOptions', function(event) {
+  alert('update');
+  saveOptions(event.data.update, true);
+});
+
+kango.addMessageListener('getOptions', function(event) {
+    event.source.dispatchMessage('setOptions', opts);
 });
 
 chrome.runtime.onInstalled.addListener(function(details) {

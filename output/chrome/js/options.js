@@ -14,18 +14,15 @@ function checkAccessToken() {
     api('photos.getAlbums', { owner_id: -69762228 }, function(data) {
       var albums = data.response.items,
           html = [],
-          defs = {},
+          defs = {albums:[]},
           i;
-      for (i = 0; i < albums.length; i++) {
-        defs['album' + albums[i].id] = false;
-      }
       loadOptions(defs);
       for (i = 0; i < albums.length; i++) {
-        html.push('<div style="margin: 12px" id="check_album' + albums[i].id + '" class="checkbox' + (opts['album' + albums[i].id] ? ' on' : '') + '"><div></div><span>' + albums[i].title + '</span></div>');
+        html.push('<div style="margin: 12px" id="check_album' + albums[i].id + '" class="checkbox"><div></div><span>' + albums[i].title + '</span></div>');
       }
       ge('list_albums').innerHTML = html.join('');
       for (i = 0; i < albums.length; i++) {
-        check('album' + albums[i].id, 'album' + albums[i].id);
+        check('album' + albums[i].id, albums[i].id);
       }
     });
   }
@@ -100,15 +97,19 @@ ge('link_logout').onclick = function() {
 
 function check(id, opt) {
   var ch = ge('check_' + id);
-  if (opts[opt]) {
+  if (opts.albums.indexOf(opt) !== -1) {
     ch.classList.add('on');
   }
   ch.onclick = function(e) {
     this.classList.toggle('on');
-    var update = {};
-    update[opt] = this.classList.contains('on');
+    var update = {albums: opts.albums};
+    if (this.classList.contains('on')) {
+      update.albums.push(opt);
+    } else {
+      update.albums.splice(update.albums.indexOf(opt), 1);
+    }
     saveOptions(update);
   };
 }
 
-checkAccessToken();
+KangoAPI.onReady(checkAccessToken);

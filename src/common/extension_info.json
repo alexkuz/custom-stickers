@@ -18,7 +18,7 @@
         "tabs": true,
         "context_menu": true,
         "web_navigation": false,
-        "notifications": false,
+        "notifications": true,
         "cookies": false,
         "xhr": ["*://*.vk.com/*", "*://*.vk.me/*"],
         "web_request": true,
