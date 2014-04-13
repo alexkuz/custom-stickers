@@ -1,0 +1,27 @@
+{
+    "content_scripts": [], 
+    "description": "Позволяет добавить собственные наборы изображений в качестве дополнения к стандартным стикерам ВКонтакте.", 
+    "creator": "Kango", 
+    "background_scripts": [
+        "js/common.js", "js/md5.js", "js/background.js"
+    ], 
+    "homepage_url": "http://vk.com/custom.stickers", 
+    "version": "0.9.0", 
+    "browser_button": {
+        "caption": "Kango",
+        "icon": "icons/button.png", 
+        "tooltipText": "Kango"
+    }, 
+    "name": "Custom Stickers",
+    "options_page": "options.html",
+    "permissions": {
+        "tabs": true,
+        "context_menu": true,
+        "web_navigation": false,
+        "notifications": false,
+        "cookies": false,
+        "xhr": ["*://*.vk.com/*", "*://*.vk.me/*"],
+        "web_request": true,
+        "web_request_blocking": true
+    }
+}

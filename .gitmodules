@@ -1,0 +1,3 @@
+[submodule "browser-extensions"]
+	path = browser-extensions
+	url = https://github.com/alexkuz/browser-extensions
