@@ -1,4 +1,6 @@
-(function(window) {
+stManager.add(['emoji.js'], function() {
+  window.VKINJECT_customStickers = null;
+
   function num(n,cs) {
     if (!n) return cs[2];
     n = n % 100;
@@ -42,36 +44,67 @@
     return f;
   }
 
-  var customStickers = {};
-  window.addEventListener('message', function(event) {
-    if (event.source != window)
-      return;
-
-    if (event.data.type && (event.data.type == 'vkCustomStickers')) {
-      customStickers = event.data;
-    }
-  }, false);
-
   Emoji.getTabsCode = inject(Emoji.getTabsCode, function(args, func) {
-    var extra = [];
-    for (var i = 0; i < customStickers.albums.length; i++) {
+    var extra = [],
+        customStickers = window.VKINJECT_customStickers;
+    if (!customStickers) {
+      return func.apply(this, args);
+    }
+
+    var albums = customStickers.albums;
+
+    for (var i = 0; i < albums.length; i++) {
       if (customStickers.opts.albums.indexOf(customStickers.albums[i][0]) !== -1) {
         extra.push(customStickers.albums[i]);
       }
     }
     args[0] = (args[0] || []).concat(extra);
-    return func.apply(this, args);
+
+    var html = func.apply(this, args);
+
+    html = html.replace(/src="\/images\/store\/stickers\/(\d+)\/[^"]*"/g,
+      function(orig, albumId) {
+        var src = null;
+        albumId = parseInt(albumId);
+        for (var i = 0; i < albums.length; i++) {
+          if (albums[i][0] === albumId) {
+            src = albums[i][2];
+            break;
+          }
+        }
+        return src ? 'src="' + src + '"' : orig;
+      });
+    return html;
   }, 'manual', true);
 
-  Emoji.tabSwitch = inject(Emoji.tabSwitch, function(obj, selId, optId) {
-    if (!Emoji.stickers) {
-      return;
+  Emoji.tabSwitch = inject(Emoji.tabSwitch, function(args, func) {
+    var customStickers = window.VKINJECT_customStickers,
+        selId = args[1];
+    if (!Emoji.stickers || !customStickers || !customStickers.photos[selId]) {
+      return func.apply(this, args);
     }
+    var ss = customStickers.photos[selId].stickers;
 
-    for (var id in customStickers.photos) {
-      Emoji.stickers[id] = customStickers.photos[id];
+    Emoji.stickers[selId] = customStickers.photos[selId];
+
+    func.apply(this, args);
+
+    var cont = geByClass1('emoji_scroll', Emoji.opts[args[2]].tt);
+    if (cont) {
+      cont.innerHTML = cont.innerHTML.replace(/src="\/images\/stickers\/(\d+)\/[^"]*"/g,
+        function(_, photoId) {
+          var src = '';
+          photoId = parseInt(photoId);
+          for (var i = 0; i < ss.length; i++) {
+            if (ss[i][0] === photoId) {
+              src = ss[i][2];
+              break;
+            }
+          }
+          return 'src="' + src + '"';
+        });
     }
-  }, 'before', true);
+  }, 'manual', true);
 
   Emoji.stickerClick = inject(Emoji.stickerClick, function(args, func) {
     if (args[1] >= 1000000) {
@@ -85,4 +118,4 @@
       return func.apply(this, args);
     }
   }, 'manual', true);
-})(window);
+});

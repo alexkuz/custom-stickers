@@ -12,7 +12,7 @@
         </em:targetApplication>
         <em:bootstrap>true</em:bootstrap>
         <em:description>Позволяет добавить собственные наборы изображений в качестве дополнения к стандартным стикерам ВКонтакте.</em:description>
-        <em:creator>Kango</em:creator>
+        <em:creator>deNull, Kuzya</em:creator>
         <em:homepageURL>http://vk.com/custom.stickers</em:homepageURL>
         <em:iconURL>chrome://kango-05f72f77-02bb-4f41-a163-983eeb858b07/content/icons/icon32.png</em:iconURL>
         <em:optionsURL>chrome://kango-05f72f77-02bb-4f41-a163-983eeb858b07/content/options.html</em:optionsURL>

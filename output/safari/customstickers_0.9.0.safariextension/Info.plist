@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Author</key>
-	<string>Kango</string>
+	<string>deNull, Kuzya</string>
 	<key>CFBundleDisplayName</key>
 	<string>Custom Stickers</string>
 	<key>CFBundleIdentifier</key>
@@ -29,24 +29,24 @@
 				<string>kango-ui-popup</string>
 			</dict>
 		</array>
-		<key>Toolbar Items</key>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict>
+			<key>Start</key>
+			<array>
+				<string>includes/content_kango.js</string>
+				<string>kango/invoke_async.js</string>
+				<string>kango/message_target.js</string>
+				<string>kango/userscript_client.js</string>
+				<string>includes/content_init.js</string>
+			</array>
+		</dict>
+		<key>Whitelist</key>
 		<array>
-			<dict>
-				<key>Command</key>
-				<string></string>
-				<key>Identifier</key>
-				<string>kango-ui-button</string>
-				<key>Image</key>
-				<string>icons/button.png</string>
-				<key>Include By Default</key>
-				<true/>
-				<key>Label</key>
-				<string>Custom Stickers</string>
-				<key>Popover</key>
-				<string>kango-ui-popup</string>
-				<key>Tool Tip</key>
-				<string>Custom Stickers</string>
-			</dict>
+			<string>http://*/*</string>
+			<string>https://*/*</string>
 		</array>
 	</dict>
 	<key>Description</key>

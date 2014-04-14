@@ -1,4 +1,17 @@
 {
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*", 
+                "https://*/*"
+            ], 
+            "all_frames": true, 
+            "run_at": "document_start", 
+            "js": [
+                "includes/content.js"
+            ]
+        }
+    ], 
     "name": "Custom Stickers", 
     "icons": {
         "128": "icons/icon128.png", 
@@ -17,12 +30,9 @@
     "options_page": "options.html", 
     "manifest_version": 2, 
     "content_security_policy": "script-src 'self' https://login.vk.com https://vk.com; object-src 'self'", 
-    "browser_action": {
-        "default_icon": "icons/button.png", 
-        "default_title": "Kango"
-    }, 
     "permissions": [
         "tabs", 
+        "webNavigation", 
         "notifications", 
         "webRequest", 
         "webRequestBlocking", 
