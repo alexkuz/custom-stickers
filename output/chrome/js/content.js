@@ -12,11 +12,11 @@ kango.addMessageListener('vkCustomStickers', function(event) {
 function injectScript(text) {
   var c = document.createElement('script');
   c.innerHTML = text;
-  document.body.appendChild(c);  
+  document.body.appendChild(c);
 }
 
 kango.xhr.send({method:'GET', url:'res/inject.js', async:true}, function(res) {
-  if (res.status == 200) {
+  if (res.status === 0 || res.status == 200) {
     injectScript(res.response);
  }  
 });

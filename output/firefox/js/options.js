@@ -18,22 +18,44 @@ function checkAccessToken() {
           i;
       loadOptions(defs);
       for (i = 0; i < albums.length; i++) {
-        html.push('<div style="margin: 12px" id="check_album' + albums[i].id + '" class="checkbox"><div></div><span>' + albums[i].title + '</span></div>');
+        html.push('<div id="check_album' + albums[i].id + '" class="checkbox" style="margin: 12px;"><div style="background-image:url('+kango.io.getResourceUrl('res/images/check.gif')+');"></div><span>' + albums[i].title + '</span></div>');
       }
       ge('list_albums').innerHTML = html.join('');
       for (i = 0; i < albums.length; i++) {
         check('album' + albums[i].id, albums[i].id);
       }
     });
+  } else {
+    kango.browser.addEventListener(kango.browser.event.DOCUMENT_COMPLETE, onDocumentComplete);
   }
+}
+
+function onDocumentComplete(event) {
+  var redirect_regex = /^https:\/\/oauth.vk.com\/blank.html#(.*)$/i,
+      match = event.url.match(redirect_regex);
+  if (match) {
+    event.target.close();
+
+    var params = match[1].split('&');
+    var map = {};
+    for (var i = 0; i < params.length; i++) {
+      var kv = params[i].split('=');
+      map[kv[0]] = kv[1];
+    }
+
+    if (map.access_token) {
+      saveOptions({ accessToken: map.access_token, secret: map.secret });
+      console.log('access_token: ', map.access_token, 'secret:', map.secret);
+      checkAccessToken();
+    }
+  }  
 }
 
 function performAuth() {
   var redirect_uri = 'https://oauth.vk.com/blank.html';
-  var redirect_regex = /^https:\/\/oauth.vk.com\/blank.html#(.*)$/i;
-  chrome.windows.getCurrent(function(wnd) {
-    chrome.tabs.getCurrent(function(tab) {
-      chrome.windows.create({
+  kango.browser.windows.getCurrent(function(wnd) {
+    wnd.getCurrentTab(function(tab) {
+      kango.browser.windows.create({
         url: 'https://oauth.vk.com/authorize?client_id=4301512&scope=messages,photos,offline,nohttps&redirect_uri=' + redirect_uri + '&display=popup&v=5.7&response_type=token',
         tabId: tab.id,
         focused: true,
@@ -42,27 +64,6 @@ function performAuth() {
         top: wnd.top + (wnd.height - 500) >> 1,
         width: 700,
         height: 500,
-      }, function(popup) {
-        chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-          var match;
-          if (tab.windowId == popup.id && changeInfo.url && (match = changeInfo.url.match(redirect_regex))) {
-            chrome.windows.remove(popup.id);
-
-            var params = match[1].split('&');
-            var map = {};
-            for (var i = 0; i < params.length; i++) {
-              var kv = params[i].split('=');
-              map[kv[0]] = kv[1];
-            }
-
-
-            if (map.access_token) {
-              saveOptions({ accessToken: map.access_token, secret: map.secret });
-              console.log('access_token: ', map.access_token, 'secret:', map.secret);
-              checkAccessToken();
-            }
-          }
-        });
       });
     });
   });
@@ -85,7 +86,7 @@ function radiobtn(c, onclick) {
   }
 }
 
-ge('button_auth').onclick = performAuth;
+ge('button_auth').addEventListener('click', performAuth, false);
 ge('button_close').onclick = function() {
   window.close();
 };
