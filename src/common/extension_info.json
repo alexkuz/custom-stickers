@@ -17,5 +17,5 @@
         "cookies": false,
         "xhr": ["*://*.vk.com/*", "*://*.vk.me/*"]
     },
-    "update_path_url": "http://kuzya.org/extensions/"
+    "update_path_url": "https://kuzya.org/extensions/"
 }

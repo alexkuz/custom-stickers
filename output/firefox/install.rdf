@@ -17,6 +17,7 @@
         <em:iconURL>chrome://kango-05f72f77-02bb-4f41-a163-983eeb858b07/content/icons/icon32.png</em:iconURL>
         <em:optionsURL>chrome://kango-05f72f77-02bb-4f41-a163-983eeb858b07/content/options.html</em:optionsURL>
         <em:optionsType>3</em:optionsType>
-        <em:updateURL>http://kuzya.org/extensions/update_firefox.xml</em:updateURL>
+        <em:updateURL>https://kuzya.org/extensions/update_firefox.xml</em:updateURL>
+        <em:updateKey>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDMA560EyRL1f5Z5RgOF6D0Z74EQkyfqOUrLC3elqIsLgFX+GJiNCrxZtyvegpIFiUgoV07ZNEzjZRvgaKqg1ARt/nQB6yB0wUJzGnmTilUOLb79/Vbobhx1w6nLcVA3Ez313t78WJE07xS6vMdUBrNagx1DZiW/fzUgtgWgrx7UwIDAQAB</em:updateKey>
     </Description>
 </RDF>

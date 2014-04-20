@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><gupdate protocol="2.0" xmlns="http://www.google.com/update2/response">
 	<app appid="ebiloidgkokepeciolbakcnbikggbjjm">
-		<updatecheck codebase="http://kuzya.org/extensions/vkcustomstickers_1.6.1.crx" version="1.6.1"/>
+		<updatecheck codebase="https://kuzya.org/extensions/vkcustomstickers_1.6.1.crx" version="1.6.1"/>
 	</app>
 </gupdate>

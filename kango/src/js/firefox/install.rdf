@@ -20,5 +20,6 @@
         <em:optionsURL>chrome://kango/content/options.html</em:optionsURL>
         <em:optionsType>3</em:optionsType>
         <em:updateURL>http://example.com/update.rdf</em:updateURL>
+        <em:updateKey> </em:updateKey>
     </Description>
 </RDF>

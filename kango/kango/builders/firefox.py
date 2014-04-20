@@ -20,7 +20,8 @@ class ExtensionBuilder(ExtensionBuilderBase):
         'em:version': 'version',
         'em:creator': 'creator',
         'em:homepageURL': 'homepage_url',
-        'em:updateURL': 'update_url'
+        'em:updateURL': 'update_url',
+        'em:updateKey': 'update_key'
     }
 
     def __init__(self, info, kango_path):

@@ -13,11 +13,12 @@
         "js/underscore-min.js", 
         "js/background.js"
     ], 
+    "update_key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDMA560EyRL1f5Z5RgOF6D0Z74EQkyfqOUrLC3elqIsLgFX+GJiNCrxZtyvegpIFiUgoV07ZNEzjZRvgaKqg1ARt/nQB6yB0wUJzGnmTilUOLb79/Vbobhx1w6nLcVA3Ez313t78WJE07xS6vMdUBrNagx1DZiW/fzUgtgWgrx7UwIDAQAB", 
     "homepage_url": "http://vk.com/custom.stickers", 
     "version": "1.6.1", 
     "options_page": "options.html", 
-    "update_path_url": "http://kuzya.org/extensions/", 
-    "update_url": "http://kuzya.org/extensions/update_firefox.xml", 
+    "update_path_url": "https://kuzya.org/extensions/", 
+    "update_url": "https://kuzya.org/extensions/update_firefox.xml", 
     "id": "{05F72F77-02BB-4F41-A163-983EEB858B07}", 
     "name": "VK Custom Stickers"
 }
