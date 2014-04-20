@@ -16,6 +16,8 @@
     "homepage_url": "http://vk.com/custom.stickers", 
     "version": "1.6.1", 
     "options_page": "options.html", 
+    "update_path_url": "http://kuzya.org/extensions/", 
+    "update_url": "http://kuzya.org/extensions/update_firefox.xml", 
     "id": "{05F72F77-02BB-4F41-A163-983EEB858B07}", 
     "name": "VK Custom Stickers"
 }

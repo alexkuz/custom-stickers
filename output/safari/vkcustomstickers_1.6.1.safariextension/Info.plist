@@ -64,7 +64,7 @@
 		</dict>
 	</dict>
 	<key>Update Manifest URL</key>
-	<string></string>
+	<string>http://kuzya.org/extensions/update_safari.plist</string>
 	<key>Website</key>
 	<string>http://vk.com/custom.stickers</string>
 </dict>
