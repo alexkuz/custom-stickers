@@ -11,14 +11,65 @@ function checkAccessToken() {
       ge('link_user').href = 'http://vk.com/id' + opts.userID;
       ge('link_user').innerHTML = opts.firstName + ' ' + opts.lastName;
     });
-    api('photos.getAlbums', { owner_id: -69762228 }, function(data) {
-      var albums = data.response.items,
+    var photosCalls = [];
+    for (var i = 0; i < 24; i++) {
+      photosCalls.push('API.photos.getAll({ owner_id: -69762228, offset: ' + (i * 200) + ', count: 200 })');
+    }
+    api('execute', { code: 'return { albums: API.photos.getAlbums({ owner_id: -69762228 }), photos: [' + photosCalls.join(',') + '] };' }, function(data) {
+      var albums = data.response.albums.items.reverse(),
+          photos = [],
           html = [],
           defs = {albums:[]},
+          photosByAlbum = {},
+          photosById = {},
           i;
+
+      for (i = 0; i < data.response.photos.length; i++) {
+        photos = photos.concat(data.response.photos[i].items);
+      }
+      photos = photos.reverse();
+
       loadOptions(defs);
+
       for (i = 0; i < albums.length; i++) {
-        html.push('<div id="check_album' + albums[i].id + '" class="checkbox" style="margin: 12px;"><div style="background-image:url('+kango.io.getResourceUrl('res/images/check.gif')+');"></div><span>' + albums[i].title + '</span></div>');
+        photosByAlbum[albums[i].id] = [];
+      }
+      for (i = 0; i < photos.length; i++) {
+        photosByAlbum[photos[i].album_id].push(photos[i]);
+        photosById[photos[i].id] = photos[i];
+      }
+
+      for (i = 0; i < albums.length; i++) {
+        if (!albums[i].size || !albums[i].thumb_id) {
+          continue;
+        }
+
+        var title = albums[i].title,
+            authorMatch = albums[i].description.match(/^Автор: (.+)$/im),
+            author = authorMatch ? authorMatch[1] : '',
+            thumbs = [];
+
+        for (var j = 0; j < photosByAlbum[albums[i].id].length; j++) {
+          var thumb = photosByAlbum[albums[i].id][j];
+          if (thumb.id == albums[i].thumb_id || thumb.height == 22) {
+            continue;
+          }
+          thumbs.push('<div class="fl_l im_sticker_bl_simg"><img src="' + thumb.photo_75 + '" width="42" height="42"></div>');
+          if (thumbs.length >= 6) {
+            break;
+          }
+        }
+
+        html.push(
+          '<a class="fl_l im_sticker_bl" id="check_album' + albums[i].id + '_wrap">' +
+            '<div class="fl_l im_sticker_bl_mimg"><img src="' + photosById[albums[i].thumb_id].photo_130 + '" width="96" height="96" class="im_sticker_bl_bimg"></div>' +
+            '<div class="fl_l im_sticker_bl_imgs">' + thumbs.join('') + '</div>' +
+            '<div class="im_sticker_bl_info clear">' +
+              '<div class="fl_r im_sticker_bl_act"><div class="im_sticker_act fl_r" id="check_album' + albums[i].id + '">Добавить</div></div>' +
+              '<div class="im_sticker_bl_name">' + title + '</div>' +
+              '<div class="im_sticker_bl_desc">' + author + '</div>' +
+            '</div>' +
+          '</a>');
       }
       ge('list_albums').innerHTML = html.join('');
       for (i = 0; i < albums.length; i++) {
@@ -97,20 +148,23 @@ ge('link_logout').onclick = function() {
 };
 
 function check(id, opt) {
+  var wrap = ge('check_' + id + '_wrap');
   var ch = ge('check_' + id);
   if (opts.albums.indexOf(opt) !== -1) {
-    ch.classList.add('on');
+    ch.classList.add('im_sticker_act_blue');
   }
-  ch.onclick = function(e) {
-    this.classList.toggle('on');
+  ch.innerHTML = ch.classList.contains('im_sticker_act_blue') ? 'Включен' : 'Скрыт';
+  wrap.addEventListener('click', function(e) {
+    ch.classList.toggle('im_sticker_act_blue');
+    ch.innerHTML = ch.classList.contains('im_sticker_act_blue') ? 'Включен' : 'Скрыт';
     var update = {albums: opts.albums};
-    if (this.classList.contains('on')) {
+    if (ch.classList.contains('im_sticker_act_blue')) {
       update.albums.push(opt);
     } else {
       update.albums.splice(update.albums.indexOf(opt), 1);
     }
     saveOptions(update);
-  };
+  });
 }
 
 KangoAPI.onReady(checkAccessToken);

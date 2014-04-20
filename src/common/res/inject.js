@@ -77,33 +77,79 @@ stManager.add(['emoji.js'], function() {
     return html;
   }, 'manual', true);
 
+  // original tabSwitch
+  var _tabSwitch = function(obj, selId, optId) {
+    if (!Emoji.stickers) {
+      Emoji.onStickersLoad = Emoji.tabSwitch.pbind(obj, selId, optId);
+      return false;
+    }
+    var html;
+    var opts = Emoji.opts[optId];
+    var tt = opts.tt;
+
+    var tabsCont = geByClass1('emoji_tabs', tt);
+    var selEl = geByClass1('emoji_tab_sel', tabsCont);
+    if (selEl == obj) {
+      return;
+    }
+    removeClass(selEl, 'emoji_tab_sel');
+    addClass(obj, 'emoji_tab_sel');
+    opts.curTab = selId;
+
+    var cont = geByClass1('emoji_scroll', tt);
+    var stickerSize = (window.devicePixelRatio >= 2) ? '128' : '64';
+    if (selId) {
+      html = '';
+      var pack = Emoji.stickers[selId];
+      if (!pack) {
+        return false;
+      }
+      var list = pack.stickers;
+      var size = 64;
+      var sizeDiv = 256 / size;
+      for (var i in list) {
+        html += '<a class="emoji_sticker_item" onclick="Emoji.stickerClick('+optId+', '+list[i][0]+');"><img width="'+parseInt(list[i][1] / sizeDiv)+'" height="'+size+'" src="/images/stickers/'+list[i][0]+'/'+stickerSize+'.png" /></a>';
+      }
+    } else {
+      html = Emoji.ttEmojiList(optId);
+    }
+    
+    return html;
+  };
+
   Emoji.tabSwitch = inject(Emoji.tabSwitch, function(args, func) {
     var customStickers = window.VKINJECT_customStickers,
-        selId = args[1];
+        selId = args[1],
+        optId = args[2],
+        opts = Emoji.opts[optId];
     if (!Emoji.stickers || !customStickers || !customStickers.photos[selId]) {
-      return func.apply(this, args);
+      cont.innerHTML = _tabSwitch.apply(this, args);
+      opts.emojiScroll.scrollTop();
+      opts.emojiScroll.update();
     }
     var ss = customStickers.photos[selId].stickers;
 
     Emoji.stickers[selId] = customStickers.photos[selId];
 
-    func.apply(this, args);
+    var html = _tabSwitch.apply(this, args);
 
     var cont = geByClass1('emoji_scroll', Emoji.opts[args[2]].tt);
-    if (cont) {
-      cont.innerHTML = cont.innerHTML.replace(/src="\/images\/stickers\/(\d+)\/[^"]*"/g,
-        function(_, photoId) {
-          var src = '';
-          photoId = parseInt(photoId);
-          for (var i = 0; i < ss.length; i++) {
-            if (ss[i][0] === photoId) {
-              src = ss[i][2];
-              break;
-            }
+    cont.innerHTML = html.replace(/src="\/images\/stickers\/(\d+)\/[^"]*"/g,
+      function(_, photoId) {
+        var src = '';
+        photoId = parseInt(photoId);
+        for (var i = 0; i < ss.length; i++) {
+          if (ss[i][0] === photoId) {
+            src = ss[i][2];
+            break;
           }
-          return 'src="' + src + '"';
-        });
-    }
+        }
+        return 'src="' + src + '"';
+      });
+
+    opts.emojiScroll.scrollTop();
+    opts.emojiScroll.update();
+
   }, 'manual', true);
 
   Emoji.stickerClick = inject(Emoji.stickerClick, function(args, func) {

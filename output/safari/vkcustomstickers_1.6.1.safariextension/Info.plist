@@ -5,15 +5,15 @@
 	<key>Author</key>
 	<string>deNull, Kuzya</string>
 	<key>CFBundleDisplayName</key>
-	<string>Custom Stickers</string>
+	<string>VK Custom Stickers</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.kangoextensions.customstickers</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.9.0</string>
+	<string>1.6.1</string>
 	<key>CFBundleVersion</key>
-	<string>0.9.0</string>
+	<string>1.6.1</string>
 	<key>Chrome</key>
 	<dict>
 		<key>Database Quota</key>

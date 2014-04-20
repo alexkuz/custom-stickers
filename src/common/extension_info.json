@@ -3,11 +3,11 @@
     "description": "Позволяет добавить собственные наборы изображений в качестве дополнения к стандартным стикерам ВКонтакте.", 
     "creator": "deNull, Kuzya", 
     "background_scripts": [
-        "js/common.js", "js/md5.js", "js/background.js"
+        "js/common.js", "js/md5.js", "js/underscore-min.js", "js/background.js"
     ], 
     "homepage_url": "http://vk.com/custom.stickers", 
-    "version": "0.9.0", 
-    "name": "Custom Stickers",
+    "version": "1.6.1", 
+    "name": "VK Custom Stickers",
     "options_page": "options.html",
     "permissions": {
         "tabs": true,
@@ -15,8 +15,7 @@
         "web_navigation": true,
         "notifications": true,
         "cookies": false,
-        "xhr": ["*://*.vk.com/*", "*://*.vk.me/*"],
-        "web_request": true,
-        "web_request_blocking": true
-    }
+        "xhr": ["*://*.vk.com/*", "*://*.vk.me/*"]
+    },
+    "update_path_url": "http://kuzya.org/extensions/"
 }

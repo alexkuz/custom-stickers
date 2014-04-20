@@ -6,23 +6,33 @@ kango.addMessageListener('getOptions', function(event) {
     event.source.dispatchMessage('setOptions', opts);
 });
 
-var albumsId = {};
-var photosId = {};
+var albumsId = {},
+    photosId = {};
 
 kango.browser.addEventListener(kango.browser.event.DOCUMENT_COMPLETE, function(event) {
+  var albums = opts.albums,
+      photoRequests = [];
+
   if (!/https?:\/\/vk.com/.test(event.url)) {
     return;
   }
 
-  api('execute', { code: 'return { albums: API.photos.getAlbums({ owner_id: -69762228 }), photos: API.photos.getAll({ owner_id: -69762228, count: 200 }) };' }, function(res) {
+  for (var i = 0; i < albums.length; i++) {
+    photoRequests.push('API.photos.get({ owner_id: -69762228, album_id: ' + albums[i] + '})');
+  }
+
+  api('execute', { code: 'return { albums: API.photos.getAlbums({ owner_id: -69762228 }), photos: [' + photoRequests.join(',') + '] };' }, function(res) {
     var stickersPhotos = {},
         stickersAlbums = [],
-        albums,
-        photos,
+        albums = res.response.albums.items,
+        photos = [],
+        css = [],
         i;
 
-    albums = res.response.albums.items;
-    photos = res.response.photos.items;
+    for (i = 0; i < res.response.photos.length; i++) {
+      photos = photos.concat(res.response.photos[i].items);
+    }
+    photos = photos.reverse();
 
     for (i = 0; i < photos.length; i++) {
       photosId[photos[i].id] = photos[i];
@@ -39,7 +49,15 @@ kango.browser.addEventListener(kango.browser.event.DOCUMENT_COMPLETE, function(e
 
     for (i = 0; i < photos.length; i++) {
       photosId[photos[i].id] = photos[i];
-      stickersPhotos[photos[i].album_id].stickers.push([photos[i].id, 256, photos[i].photo_75]);
+
+      if (photos[i].height == 22) {
+        css.push('.emoji_tab_' + photos[i].album_id +' img {display:none !important;}');
+        css.push('.emoji_tab_' + photos[i].album_id +':before {content:"";display:block;width:22px;height:22px;background:url(' + photos[i].photo_75 + ');background-repeat:no-repeat;}');
+        css.push('.emoji_tab_' + photos[i].album_id +':hover:before {background-position-x:-22px;}');
+        css.push('.emoji_tab_' + photos[i].album_id +'.emoji_tab_sel:before {background-position-x:-44px;}');
+      } else {
+        stickersPhotos[photos[i].album_id].stickers.push([photos[i].id, 256, photos[i].photo_75]);
+      }
     }
 
     event.target.dispatchMessage('vkCustomStickers', {
@@ -47,5 +65,9 @@ kango.browser.addEventListener(kango.browser.event.DOCUMENT_COMPLETE, function(e
       albums: stickersAlbums,
       opts: opts
     });
+
+    if (css) {
+      event.target.dispatchMessage('injectCss', css.join(' '));      
+    }
   });
 });
