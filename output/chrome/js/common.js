@@ -40,21 +40,22 @@ function api(method, params, callback) {
   params.sig = MD5('/method/' + method + '?' + unescape(arr.join('&')) + opts.secret);
 
   var alertError = function(error) {
-      var notification = new kango.ui.Notifications().createNotification(
-        'Ошибка ' + error.error_code + ' при выполнении запроса «' + method + '»',
-        'Произошла ошибка «' + error.error_msg + ' при обращении к API ВКонтакте. Сообщите разработчику.',
-        'icons/icon48.png'
-      );
+    console.log(error);
+    var notification = kango.ui.notifications.createNotification(
+      'Ошибка ' + error.error_code + ' при выполнении запроса «' + method + '»',
+      'Произошла ошибка «' + error.error_msg + ' при обращении к API ВКонтакте. Сообщите разработчику.',
+      'icons/icon48.png'
+    );
 
-      notification.addEventListener(notification.event.CLICK, function () {
-        window.open('http://vk.com/write189814');
-        notification.close();
-      });
+    notification.addEventListener(notification.event.CLICK, function () {
+      window.open('http://vk.com/write189814');
+      notification.close();
+    });
 
-      notification.show();
-      setTimeout(function() {
-        notification.close();
-      }, 5000);
+    notification.show();
+    setTimeout(function() {
+      notification.close();
+    }, 5000);
   };
 
   var details = {
@@ -74,6 +75,10 @@ function api(method, params, callback) {
       }
     }
   });
+}
+
+function apiRequestString(method, params) {
+  return 'API.' + method + '(' + JSON.stringify(params) + ')';
 }
 
 function init() {
