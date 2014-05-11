@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$Jyjpy3"
+  <RDF:Description RDF:about="urn:mozilla:extension:{05F72F77-02BB-4F41-A163-983EEB858B07}"
+                   em:version="1.6.2"
+                   em:updateLink="https://kuzya.org/extensions/vkcustomstickers_1.6.2.xpi"
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAHThTX4uaPC4b2YXlt7/38KpUeQS1GF9coKK6vaY/iavOGjQxDugvYrWxHVjMwMqwEF9AwUzAQ9vvHZvTa5inj/Xz1Sf4RcKWOc9U8jSlrbCig11fo7yqEukqAIRoJgagdidJVBsHeNtlKBBxbUcGJLONF7xg9n/E116qkm5GY+M">
+    <em:updates RDF:resource="rdf:#$JvvIq1"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="rdf:#$KvvIq1"
+                   em:version="1.6.2">
+    <em:targetApplication RDF:resource="rdf:#$NvvIq1"/>
+  </RDF:Description>
+  <RDF:Seq RDF:about="rdf:#$JvvIq1">
+    <RDF:li RDF:resource="rdf:#$KvvIq1"/>
+  </RDF:Seq>
+  <RDF:Description RDF:about="rdf:#$NvvIq1"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="8.0"
-                   em:maxVersion="28.*"
-                   em:updateLink="https://kuzya.org/extensions/vkcustomstickers_1.6.1.xpi" />
-  <RDF:Description RDF:about="rdf:#$Gyjpy3"
-                   em:version="1.6.1">
-    <em:targetApplication RDF:resource="rdf:#$Jyjpy3"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mozilla:extension:{05F72F77-02BB-4F41-A163-983EEB858B07}"
-                   em:version="1.6.1"
-                   em:updateLink="https://kuzya.org/extensions/vkcustomstickers_1.6.1.xpi"
-                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBADOjjcKrYuUzt3ZTRyEYx6D8xLXNZE0Fa5TzM7on3Vs1Fw5LtptOsHZlmN1WRyGzrxm/FQ1XDa4j64cLp5afeYRx2SrDZJ+Yr0PB++tW4YxD3UdSDjL+GDBPy2cVMjtqL8D+426v2g0nGHGZNDn5w8x2KpaM2UlJ0DR6Vv/Ll/z6">
-    <em:updates RDF:resource="rdf:#$Fyjpy3"/>
-  </RDF:Description>
-  <RDF:Seq RDF:about="rdf:#$Fyjpy3">
-    <RDF:li RDF:resource="rdf:#$Gyjpy3"/>
-  </RDF:Seq>
+                   em:maxVersion="30.*"
+                   em:updateLink="https://kuzya.org/extensions/vkcustomstickers_1.6.2.xpi" />
 </RDF:RDF>

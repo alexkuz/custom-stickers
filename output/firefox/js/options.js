@@ -35,6 +35,9 @@ function checkAccessToken() {
         photosByAlbum[albums[i].id] = [];
       }
       for (i = 0; i < photos.length; i++) {
+        if (photos[i].album_id <= 0) {
+          continue;
+        }
         photosByAlbum[photos[i].album_id].push(photos[i]);
         photosById[photos[i].id] = photos[i];
       }
@@ -69,7 +72,8 @@ function checkAccessToken() {
               '<div class="im_sticker_bl_name">' + title + '</div>' +
               '<div class="im_sticker_bl_desc">' + author + '</div>' +
             '</div>' +
-          '</a>');
+          '</a>'
+        );
       }
       ge('list_albums').innerHTML = html.join('');
       for (i = 0; i < albums.length; i++) {

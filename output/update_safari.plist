@@ -8,13 +8,13 @@
 			<key>CFBundleIdentifier</key>
 			<string>com.kangoextensions.customstickers</string>
 			<key>CFBundleShortVersionString</key>
-			<string>1.6.1</string>
+			<string>1.6.2</string>
 			<key>CFBundleVersion</key>
-			<string>1.6.1</string>
+			<string>1.6.2</string>
 			<key>Developer Identifier</key>
 			<string>YOUR_SAFARI_DEVELOPER_ID</string>
 			<key>URL</key>
-			<string>https://kuzya.org/extensions/vkcustomstickers_1.6.1.safariextz</string>
+			<string>https://kuzya.org/extensions/vkcustomstickers_1.6.2.safariextz</string>
 		</dict>
 	</array>
 </dict>
