@@ -14,7 +14,7 @@
         "js/background.js"
     ], 
     "homepage_url": "http://vk.com/custom.stickers", 
-    "version": "1.6.2", 
+    "version": "1.6.3", 
     "options_page": "options.html", 
     "update_path_url": "https://kuzya.org/extensions/", 
     "update_url": "https://kuzya.org/extensions/update_safari.plist", 

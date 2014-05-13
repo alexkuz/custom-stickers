@@ -2,7 +2,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:id>{05F72F77-02BB-4F41-A163-983EEB858B07}</em:id>
         <em:name>VK Custom Stickers</em:name>
-        <em:version>1.6.2</em:version>
+        <em:version>1.6.3</em:version>
         <em:targetApplication>
             <Description>
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
