@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Seq RDF:about="rdf:#$hD0xO1">
+    <RDF:li RDF:resource="rdf:#$iD0xO1"/>
+  </RDF:Seq>
   <RDF:Description RDF:about="urn:mozilla:extension:{05F72F77-02BB-4F41-A163-983EEB858B07}"
-                   em:version="1.6.3"
-                   em:updateLink="https://kuzya.org/extensions/vkcustomstickers_1.6.3.xpi"
-                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAJUriX/8EJ7szsYVdxEK95cC/kKes8e3dFRSO0VB/S+aPFloE8Ldpj+zYM405pyHdI/Oe7FnAcs0OBIK7HaVbb3BoqdgY3hJWmjJ+AJn6t/qjwbyqvm4qAtzPkJsHj+VPIOT60Sl5wrAQ5vfvS2a1kdeE4fahZRRYkrTvSSIRzWs">
-    <em:updates RDF:resource="rdf:#$z4.f41"/>
+                   em:version="1.7"
+                   em:updateLink="https://kuzya.org/extensions/vkcustomstickers_1.7.xpi"
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAMoaZF8Gkl35dAXERyUa2t4srNCtQPL+FtdV/k2KIz12pWDc2c7xDNjVL4IHMUTvD/DWe/GhExiqtmkNOv9FftcVAdtJARuhIZCtj8aA5rfpJ8gP/5S6jaLNtFkMv5O5PkgMOXgf0+GF6OO8JjX2f8fQg+kdJJwZg6jVqdHwi6A0">
+    <em:updates RDF:resource="rdf:#$hD0xO1"/>
   </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$A4.f41"
-                   em:version="1.6.3">
-    <em:targetApplication RDF:resource="rdf:#$D4.f41"/>
+  <RDF:Description RDF:about="rdf:#$iD0xO1"
+                   em:version="1.7">
+    <em:targetApplication RDF:resource="rdf:#$lD0xO1"/>
   </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$D4.f41"
+  <RDF:Description RDF:about="rdf:#$lD0xO1"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="8.0"
                    em:maxVersion="30.*"
-                   em:updateLink="https://kuzya.org/extensions/vkcustomstickers_1.6.3.xpi" />
-  <RDF:Seq RDF:about="rdf:#$z4.f41">
-    <RDF:li RDF:resource="rdf:#$A4.f41"/>
-  </RDF:Seq>
+                   em:updateLink="https://kuzya.org/extensions/vkcustomstickers_1.7.xpi" />
 </RDF:RDF>

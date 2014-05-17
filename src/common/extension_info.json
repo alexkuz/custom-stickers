@@ -6,16 +6,17 @@
         "js/common.js", "js/md5.js", "js/underscore-min.js", "js/background.js"
     ], 
     "homepage_url": "http://vk.com/custom.stickers", 
-    "version": "1.6.3", 
+    "version": "1.7", 
     "name": "VK Custom Stickers",
     "options_page": "options.html",
     "permissions": {
         "tabs": true,
-        "context_menu": true,
+        "context_menu": false,
         "web_navigation": true,
         "notifications": true,
         "cookies": false,
-        "xhr": ["*://*.vk.com/*", "*://*.vk.me/*"]
+        "xhr": ["*://*.vk.com/*", "*://*.vk.me/*"],
+        "content_scripts": ["http://*.vk.com/*", "https://*.vk.me/*"]
     },
     "update_path_url": "https://kuzya.org/extensions/"
 }

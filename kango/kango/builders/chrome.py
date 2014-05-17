@@ -130,8 +130,9 @@ class ExtensionBuilder(ExtensionBuilderBase):
             manifest['content_scripts'][0]['matches'] = info.permissions['content_scripts']
 
         for key in self._permission_table:
-            if not info.permissions[key]:
-                manifest['permissions'].remove(self._permission_table[key])
+            permission = self._permission_table[key]
+            if not info.permissions[key] and permission in manifest['permissions']:
+                manifest['permissions'].remove(permission)
 
     def _process_includes(self, manifest, out_path):
         includes_path = os.path.join(out_path, 'includes')
